@@ -49,4 +49,19 @@ if (!function_exists('can')) {
         return false;
     }
 }
+// if (!function_exists('get_select')) {
+
+//     /**
+//      * Retrieve a key-value pair (usually id and name) from a model.
+//      *
+//      * @param string $model The model to query.
+//      * @param int $id The id of the item to retrieve.
+//      * @param string $name The name of the column to retrieve.
+//      * @return \Illuminate\Support\Collection The key-value pair.
+//      */
+//     function get_select(string $model, string $id, string $name): \Illuminate\Support\Collection
+//     {
+//         return app()->make($model)->pluck($name, $id);
+//     }
+// }
 

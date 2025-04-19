@@ -90,87 +90,40 @@
     </section>
     <!-- /.content -->
 
-    @if(can('dashboard'))
+   {{-- // @if(can('dashboard')) --}}
     <section class="content">
         <div class="container-lg col-md-12">
             <div class="row">
                 <?php
                 $metrics = [
-                    'Monthly Sales' => DB::table('sales_models')
-                        ->whereMonth('created_at', now()->month)
+                    'Total Users' => DB::table('users')
                         ->count(),
-                    'Monthly Expense' => DB::table('pettycash')
-                        ->whereMonth('created_at', now()->month)
-                        ->sum('amount'),
-                    'Total Liability' => DB::table('purchas_models')
-                        ->whereMonth('created_at', now()->month)
-                        ->count(),
-                    'Running Petty cash' => DB::table('pettycash')
-                        ->where('status', 'Pending')
-                        ->count(),
-                    'Total Advance' => DB::table('advanced_cash')
-                        ->sum('amount'),
-                    'Total Item' => DB::table('items')
-                        ->count(),
-                    'Total Product Value' => DB::table('items')
-                        ->sum(DB::raw('item_qty * item_purchase_price')),
-                    'Total Due' => DB::table('sales_models')
-                        ->sum('due_amount'),
-                    'Total Yearly Profit' => DB::table('sales_payment_models')
-                        ->whereYear('created_at', now()->year)
-                        ->where('payment_status', 'Completed')
-                        ->sum('payment_amount'),
                 ];
 
                 $icons = [
-                    'Monthly Sales' => 'fas fa-dollar-sign',
-                    'Monthly Expense' => 'fas fa-money-bill',
-                    'Total Due' => 'fas fa-credit-card',
-                    'Total Advance' => 'fas fa-forward',
-                    'Total Product Value' => 'fas fa-boxes',
-                    'Total Yearly Profit' => 'fas fa-chart-line',
-                    'Total Liability' => 'fas fa-credit-card',
-                    'Total Item' => 'fas fa-boxes',
-                    'Running Petty cash' => 'fas fa-money-bill',
-
+                    'Total Users' => 'fas fa-users',
 
                 ];
 
                 $subtitles = [
-                    'Monthly Sales' => 'Sales made this month',
-                    'Monthly Expense' => 'Expenses this month',
-                    'Total Due' => 'Outstanding dues',
-                    'Total Advance' => 'Total advanced payments',
-                    'Total Product Value' => 'Value of all products in stock',
-                    'Total Yearly Profit' => 'Profit made this year',
-                    'Total Liability' => 'Total liabilities',
-                    'Total Item' => 'Total items in stock',
-                    'Running Petty cash' => 'Running petty cash',
+                    'Total Users' => 'Total Users',
                 ];
                 $permissions=[
-                    'Monthly Sales' => 'monthly_sales',
-                    'Monthly Expense' => 'monthly_expense',
-                    'Total Due' => 'total_due',
-                    'Total Advance' => 'total_advance',
-                    'Total Product Value' => 'total_product_value',
-                    'Total Yearly Profit' => 'total_yearly_profit',
-                    'Total Liability' => 'total_liability',
-                    'Total Item' => 'total_item',
-                    'Running Petty cash' => 'running_petty_cash',
+                    'Total Users' => 'total_users',
                 ];
                 ?>
 
                     @foreach ($metrics as $title => $value)
-                    @if(!can($permissions[$title]))
+                    {{-- @if(!can($permissions[$title]))
                     @continue
-                    @endif
+                    @endif --}}
                     <div class="col-12 col-md-4 col-xxl-3 mb-10">
                         <div class="custom-card">
                             <div class="card-body">
                                 <div class="card-content d-flex align-items-center">
                                     <div>
                                         <h5 class="card-title">{{ $title }}</h5>
-                                        <h3 class="card-value">{{ number_format($value, 2) }}</h3>
+                                        <h3 class="card-value">{{ number_format($value) }}</h3>
                                     </div>
                                     <div class="icon-container">
                                         <i class="{{ $icons[$title] }}"></i>
@@ -184,7 +137,7 @@
 
         </div>
     </section>
-    @endif
+    {{-- @endif --}}
 
 @stop
 @section('footer_scripts')

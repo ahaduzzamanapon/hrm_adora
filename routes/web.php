@@ -3,8 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\AttendenceController;
+use App\Http\Controllers\Attendance;
 use App\Http\Controllers\SalesController;
+use App\Http\Controllers\SalaryControler;
 
 
 include 'demo.php';
@@ -18,6 +19,11 @@ include 'demo.php';
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
+Route::get('/get_auto_attendance', [Attendance::class, 'get_auto_attendance']);
+Route::get('/process/{date}/{memberIds}', [Attendance::class, 'process']);
+Route::get('/process_attendence', [Attendance::class, 'process_attendence'])->name('attendences.process_attendence');
 
 Auth::routes();
 
@@ -54,10 +60,16 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('tableCheck', 'AppBaseController@tableCheck');
 
     include 'web_builder.php';
+    Route::get('attendances', [Attendance::class, 'index'])->name('attendance.index');
+    Route::get('salary', [SalaryControler::class, 'index'])->name('salary.index');
+    Route::get('get_member', [Attendance::class, 'get_member'])->name('attendences.get_member');
+    Route::get('/attendences/daily-report', [Attendance::class, 'dailyAttendanceReport'])
+    ->name('attendences.daily_attendence_report');
 
 });
 Route::get('empty_table', 'JoshController@emptyTable');
 Route::get('remove_all_files', 'JoshController@remove_all_files');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('{name?}', 'JoshController@showView');
+
 
