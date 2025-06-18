@@ -79,7 +79,7 @@
 @endif
 {{-- Payroll mANAMENT --}}
 @if(can('user_management'))
-<li {!! (Request::is('payroll*') ? 'class="menu-dropdown mm-active active"': "class='menu-dropdown'" ) !!}>
+<li {!! (Request::is('payroll*') || Request::is('salary*') || Request::is('advanceSalaries*') ? 'class="menu-dropdown mm-active active"': "class='menu-dropdown'" ) !!}>
     <a href="#"  class="barr2">
         <span class="mm-text ">Payroll Management</span>
         <span class="menu-icon "><i class="align-self-center fa-1x fas fa-diagnoses"></i></span>
@@ -102,6 +102,12 @@
             </a>
         </li>
         @endif
+        <li class="barr4 {!! (Request::is('advanceSalaries*') ? 'active' : '' ) !!}">
+            <a href="{{ route('advanceSalaries.index') }}">
+                <span class="mm-text ">Advance Salaries</span>
+                <span class="menu-icon"><i class="im im-icon-Structure"></i></span>
+            </a>
+        </li>
     </ul>
 </li>
 @endif
@@ -143,6 +149,8 @@
     </ul>
 </li>
 @endif
+
+
 
 
 

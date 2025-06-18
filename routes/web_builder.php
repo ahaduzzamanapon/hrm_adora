@@ -19,3 +19,5 @@ Route::resource('holydays', 'HolydayController');
 Route::resource('leaves', 'LeaveController');
 
 Route::resource('leaveTypes', 'LeaveTypeController');
+
+Route::resource('advanceSalaries', 'AdvanceSalaryController');
